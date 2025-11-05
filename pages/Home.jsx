@@ -3,8 +3,9 @@ import {
   requestForegroundPermissionsAsync,
 } from "expo-location";
 import { useEffect, useState } from "react";
-import { Text, View } from "react-native";
+import { View } from "react-native";
 import { MeteoAPI } from "../api/meteo";
+import { AppText } from "../components/AppText/AppText";
 import { styles } from "./Home.style";
 
 export function Home() {
@@ -48,9 +49,9 @@ export function Home() {
     <>
       <View style={styles.meteo_basic}>
         {weather && (
-          <Text style={styles.title}>
+          <AppText style={styles.title}>
             Chez vous, il fait {weather.current_weather.temperature} °C
-          </Text>
+          </AppText>
         )}
       </View>
       <View style={styles.searchbar_container}></View>
