@@ -4,14 +4,22 @@ import {
 } from "expo-location";
 import { useEffect, useState } from "react";
 import { Text, View } from "react-native";
+import { MeteoAPI } from "../api/meteo";
 import { styles } from "./Home.style";
 
 export function Home() {
   const [location, setLocation] = useState(null);
+  const [weather, setWeather] = useState(null);
 
   useEffect(() => {
     getUserLocation();
   }, []);
+
+  useEffect(() => {
+    if (location) {
+      fetchMeteoData(location);
+    }
+  }, [location]);
 
   async function getUserLocation() {
     let { status } = await requestForegroundPermissionsAsync();
@@ -31,11 +39,19 @@ export function Home() {
     });
   }
 
+  async function fetchMeteoData(location) {
+    const weatherResponse = await MeteoAPI.fetchWeatherFromLocation(location);
+    setWeather(weatherResponse);
+  }
+
   return (
     <>
       <View style={styles.meteo_basic}>
-        <Text style={styles.title}> {location.latitude}</Text>
-        <Text style={styles.title}> {location.longitude}</Text>
+        {weather && (
+          <Text style={styles.title}>
+            Chez vous, il fait {weather.current_weather.temperature} °C
+          </Text>
+        )}
       </View>
       <View style={styles.searchbar_container}></View>
       <View style={styles.meteo_advanced}></View>
