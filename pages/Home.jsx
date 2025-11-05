@@ -5,7 +5,7 @@ import {
 import { useEffect, useState } from "react";
 import { View } from "react-native";
 import { MeteoAPI } from "../api/meteo";
-import { AppText } from "../components/AppText/AppText";
+import { MeteoBasic } from "../components/MeteoBasic/MeteoBasic";
 import { styles } from "./Home.style";
 
 export function Home() {
@@ -48,11 +48,7 @@ export function Home() {
   return (
     <>
       <View style={styles.meteo_basic}>
-        {weather && (
-          <AppText style={styles.title}>
-            Chez vous, il fait {weather.current_weather.temperature} °C
-          </AppText>
-        )}
+        <MeteoBasic />
       </View>
       <View style={styles.searchbar_container}></View>
       <View style={styles.meteo_advanced}></View>
