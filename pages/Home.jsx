@@ -6,11 +6,13 @@ import { useEffect, useState } from "react";
 import { View } from "react-native";
 import { MeteoAPI } from "../api/meteo";
 import { MeteoBasic } from "../components/MeteoBasic/MeteoBasic";
+import { getWeatherInterpretation } from "../services/meteo-service";
 import { styles } from "./Home.style";
 
 export function Home() {
   const [location, setLocation] = useState(null);
   const [weather, setWeather] = useState(null);
+  const currentWeather = weather?.current_weather;
 
   useEffect(() => {
     getUserLocation();
@@ -45,13 +47,17 @@ export function Home() {
     setWeather(weatherResponse);
   }
 
-  return (
+  return currentWeather ? (
     <>
       <View style={styles.meteo_basic}>
-        <MeteoBasic />
+        <MeteoBasic
+          temperature={Math.round(currentWeather?.temperature)}
+          city="Todo"
+          interpretation={getWeatherInterpretation(currentWeather.weathercode)}
+        />
       </View>
       <View style={styles.searchbar_container}></View>
       <View style={styles.meteo_advanced}></View>
     </>
-  );
+  ) : null;
 }
