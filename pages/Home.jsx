@@ -12,6 +12,8 @@ import { styles } from "./Home.style";
 export function Home() {
   const [location, setLocation] = useState(null);
   const [weather, setWeather] = useState(null);
+  const [city, setCity] = useState(null);
+
   const currentWeather = weather?.current_weather;
 
   useEffect(() => {
@@ -21,6 +23,7 @@ export function Home() {
   useEffect(() => {
     if (location) {
       fetchMeteoData(location);
+      fetchCity(location);
     }
   }, [location]);
 
@@ -47,12 +50,17 @@ export function Home() {
     setWeather(weatherResponse);
   }
 
+  async function fetchCity(location) {
+    const cityResponse = await MeteoAPI.fetchCityFromLocation(location);
+    setCity(cityResponse);
+  }
+
   return currentWeather ? (
     <>
       <View style={styles.meteo_basic}>
         <MeteoBasic
           temperature={Math.round(currentWeather?.temperature)}
-          city="Todo"
+          city={city}
           interpretation={getWeatherInterpretation(currentWeather.weathercode)}
         />
       </View>
