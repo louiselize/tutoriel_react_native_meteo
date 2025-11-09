@@ -20,4 +20,16 @@ export class MeteoAPI {
 
     return city || village || town;
   }
+
+  static async fetchLocationFromCity(city) {
+    try {
+      return (
+        await axios.get(
+          `https://geocoding-api.open-meteo.com/v1/search?name=${city}&language=fr&count=1`
+        )
+      ).data.results[0];
+    } catch (e) {
+      throw "Pas de coordonnées trouvées pour la recherche : " + city;
+    }
+  }
 }

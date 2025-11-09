@@ -4,7 +4,7 @@ import {
   requestForegroundPermissionsAsync,
 } from "expo-location";
 import { useEffect, useState } from "react";
-import { View } from "react-native";
+import { Alert, View } from "react-native";
 import { MeteoAPI } from "../../api/meteo";
 import { Container } from "../../components/Container/Container";
 import { MeteoAdvanced } from "../../components/MeteoAdvanced/MeteoAdvanced";
@@ -60,6 +60,15 @@ export function Home() {
     setCity(cityResponse);
   }
 
+  async function fetchLocation(city) {
+    try {
+      const locationResponse = await MeteoAPI.fetchLocationFromCity(city);
+      setLocation(locationResponse);
+    } catch (e) {
+      Alert.alert(e);
+    }
+  }
+
   function goToForecastPage() {
     navigation.navigate("Forecast", { city, ...weather.daily });
   }
@@ -74,7 +83,7 @@ export function Home() {
         />
       </View>
       <View style={styles.searchbar_container}>
-        <Searchbar></Searchbar>
+        <Searchbar onSubmit={fetchLocation}></Searchbar>
       </View>
 
       <View style={styles.meteo_advanced}>
