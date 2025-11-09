@@ -2,6 +2,7 @@ import { useNavigation, useRoute } from "@react-navigation/native";
 import { TouchableOpacity, View } from "react-native";
 import { AppText } from "../../components/AppText/AppText";
 import { Container } from "../../components/Container/Container";
+import { ForescastListItem } from "../../components/ForecastListItem/ForecastListItem";
 import { styles } from "./Forecast.style";
 
 export function Forecast({}) {
@@ -25,5 +26,41 @@ export function Forecast({}) {
       </View>
     </View>
   );
-  return <Container>{header}</Container>;
+  return (
+    <Container>
+      {header}
+      <View style={{ marginTop: 50 }}>
+        <ForescastListItem
+          image={require("../../assets/clouds.png")}
+          day="LUN"
+          date="03/11/2025"
+          temperature={16}></ForescastListItem>
+        <ForescastListItem
+          image={require("../../assets/clouds.png")}
+          day="LUN"
+          date="03/11/2025"
+          temperature={16}></ForescastListItem>
+        <ForescastListItem
+          image={require("../../assets/clouds.png")}
+          day="LUN"
+          date="03/11/2025"
+          temperature={16}></ForescastListItem>
+        <ForescastListItem
+          image={require("../../assets/clouds.png")}
+          day="LUN"
+          date="03/11/2025"
+          temperature={16}></ForescastListItem>
+        <ForescastListItem
+          image={require("../../assets/clouds.png")}
+          day="LUN"
+          date="03/11/2025"
+          temperature={16}></ForescastListItem>
+        <ForescastListItem
+          image={require("../../assets/clouds.png")}
+          day="LUN"
+          date="03/11/2025"
+          temperature={16}></ForescastListItem>
+      </View>
+    </Container>
+  );
 }
