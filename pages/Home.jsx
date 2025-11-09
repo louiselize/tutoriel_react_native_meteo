@@ -5,6 +5,7 @@ import {
 import { useEffect, useState } from "react";
 import { View } from "react-native";
 import { MeteoAPI } from "../api/meteo";
+import { MeteoAdvanced } from "../components/MeteoAdvanced/MeteoAdvanced";
 import { MeteoBasic } from "../components/MeteoBasic/MeteoBasic";
 import { getWeatherInterpretation } from "../services/meteo-service";
 import { styles } from "./Home.style";
@@ -65,7 +66,13 @@ export function Home() {
         />
       </View>
       <View style={styles.searchbar_container}></View>
-      <View style={styles.meteo_advanced}></View>
+      <View style={styles.meteo_advanced}>
+        <MeteoAdvanced
+          dusk={weather.daily.sunrise[0].split("T")[1]}
+          dawn={weather.daily.sunset[0].split("T")[1]}
+          wind={currentWeather.windspeed}
+        />
+      </View>
     </>
   ) : null;
 }
