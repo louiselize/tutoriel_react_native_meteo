@@ -9,6 +9,7 @@ import { MeteoAPI } from "../../api/meteo";
 import { Container } from "../../components/Container/Container";
 import { MeteoAdvanced } from "../../components/MeteoAdvanced/MeteoAdvanced";
 import { MeteoBasic } from "../../components/MeteoBasic/MeteoBasic";
+import { Searchbar } from "../../components/Searchbar/Searchbar";
 import { getWeatherInterpretation } from "../../services/meteo-service";
 import { styles } from "./Home.style";
 
@@ -72,7 +73,10 @@ export function Home() {
           onTemperaturePress={goToForecastPage}
         />
       </View>
-      <View style={styles.searchbar_container}></View>
+      <View style={styles.searchbar_container}>
+        <Searchbar></Searchbar>
+      </View>
+
       <View style={styles.meteo_advanced}>
         <MeteoAdvanced
           dusk={weather.daily.sunrise[0].split("T")[1]}
