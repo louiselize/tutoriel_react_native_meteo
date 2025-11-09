@@ -1,5 +1,5 @@
 import { useNavigation, useRoute } from "@react-navigation/native";
-import { TouchableOpacity } from "react-native";
+import { TouchableOpacity, View } from "react-native";
 import { AppText } from "../../components/AppText/AppText";
 import { Container } from "../../components/Container/Container";
 import { styles } from "./Forecast.style";
@@ -15,10 +15,15 @@ export function Forecast({}) {
       <AppText style={{ fontSize: 18 }}>←</AppText>
     </TouchableOpacity>
   );
-  return (
-    <Container>
+
+  const header = (
+    <View style={styles.header}>
       {backButton}
-      <AppText>Forecast at {params.city}</AppText>
-    </Container>
+      <View style={styles.header_text}>
+        <AppText style={{ fontSize: 25 }}>{params.city}</AppText>
+        <AppText style={styles.subtitle}>Prévision sur 7 jours</AppText>
+      </View>
+    </View>
   );
+  return <Container>{header}</Container>;
 }
