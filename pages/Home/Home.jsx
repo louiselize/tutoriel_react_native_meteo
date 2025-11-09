@@ -60,7 +60,7 @@ export function Home() {
   }
 
   function goToForecastPage() {
-    navigation.navigate("Forecast");
+    navigation.navigate("Forecast", { city, ...weather.daily });
   }
   return currentWeather ? (
     <Container>
