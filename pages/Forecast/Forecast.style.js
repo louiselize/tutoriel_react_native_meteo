@@ -18,4 +18,5 @@ export const styles = StyleSheet.create({
     marginRight: 30, // same size as go back button to be perfectly centered
   },
   subtitle: { fontSize: 20 },
+  forecast_list: { marginTop: 50 },
 });

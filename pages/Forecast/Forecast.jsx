@@ -3,6 +3,8 @@ import { TouchableOpacity, View } from "react-native";
 import { AppText } from "../../components/AppText/AppText";
 import { Container } from "../../components/Container/Container";
 import { ForescastListItem } from "../../components/ForecastListItem/ForecastListItem";
+import { dateToDDMM, DAYS } from "../../services/date-service";
+import { getWeatherInterpretation } from "../../services/meteo-service";
 import { styles } from "./Forecast.style";
 
 export function Forecast({}) {
@@ -26,41 +28,31 @@ export function Forecast({}) {
       </View>
     </View>
   );
+
+  const forecastList = (
+    <View style={styles.forecast_list}>
+      {params.time.map((time, index) => {
+        const code = params.weathercode[index];
+        const image = getWeatherInterpretation(code).image;
+        const date = new Date(time);
+        const day = DAYS[date.getDay()];
+        const temperature = params.temperature_2m_max[index].toFixed(0);
+        return (
+          <ForescastListItem
+            key={time}
+            image={image}
+            day={day}
+            date={dateToDDMM(date)}
+            temperature={temperature}
+          />
+        );
+      })}
+    </View>
+  );
   return (
     <Container>
       {header}
-      <View style={{ marginTop: 50 }}>
-        <ForescastListItem
-          image={require("../../assets/clouds.png")}
-          day="LUN"
-          date="03/11/2025"
-          temperature={16}></ForescastListItem>
-        <ForescastListItem
-          image={require("../../assets/clouds.png")}
-          day="LUN"
-          date="03/11/2025"
-          temperature={16}></ForescastListItem>
-        <ForescastListItem
-          image={require("../../assets/clouds.png")}
-          day="LUN"
-          date="03/11/2025"
-          temperature={16}></ForescastListItem>
-        <ForescastListItem
-          image={require("../../assets/clouds.png")}
-          day="LUN"
-          date="03/11/2025"
-          temperature={16}></ForescastListItem>
-        <ForescastListItem
-          image={require("../../assets/clouds.png")}
-          day="LUN"
-          date="03/11/2025"
-          temperature={16}></ForescastListItem>
-        <ForescastListItem
-          image={require("../../assets/clouds.png")}
-          day="LUN"
-          date="03/11/2025"
-          temperature={16}></ForescastListItem>
-      </View>
+      {forecastList}
     </Container>
   );
 }

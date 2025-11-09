@@ -18,4 +18,7 @@ export const styles = StyleSheet.create({
   date: {
     fontSize: 20,
   },
+  temperature: {
+    width: 60,
+  },
 });

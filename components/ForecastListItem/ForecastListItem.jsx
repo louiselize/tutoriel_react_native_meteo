@@ -8,7 +8,7 @@ export function ForescastListItem({ image, day, date, temperature }) {
       <Image style={styles.image} source={image}></Image>
       <AppText style={styles.day}>{day}</AppText>
       <AppText style={styles.date}>{date}</AppText>
-      <AppText>{temperature}°</AppText>
+      <AppText style={styles.temperature}>{temperature}°</AppText>
     </View>
   );
 }
