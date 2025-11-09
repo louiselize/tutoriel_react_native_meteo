@@ -4,10 +4,10 @@ import {
 } from "expo-location";
 import { useEffect, useState } from "react";
 import { View } from "react-native";
-import { MeteoAPI } from "../api/meteo";
-import { MeteoAdvanced } from "../components/MeteoAdvanced/MeteoAdvanced";
-import { MeteoBasic } from "../components/MeteoBasic/MeteoBasic";
-import { getWeatherInterpretation } from "../services/meteo-service";
+import { MeteoAPI } from "../../api/meteo";
+import { MeteoAdvanced } from "../../components/MeteoAdvanced/MeteoAdvanced";
+import { MeteoBasic } from "../../components/MeteoBasic/MeteoBasic";
+import { getWeatherInterpretation } from "../../services/meteo-service";
 import { styles } from "./Home.style";
 
 export function Home() {
